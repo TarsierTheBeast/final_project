@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial');
+body{
+  background-image: url("https://cdn0.vox-cdn.com/thumbor/RZEAlXyYId2K6-2v8ZCqPYKyeIw=/0x0:1020x652/1200x800/filters:focal(429x245:591x407)/cdn0.vox-cdn.com/uploads/chorus_image/image/54062981/steam.0.jpg")
+}
+svg{
+  background-image: url("https://activerain-store.s3.amazonaws.com/image_store/uploads/5/4/8/5/5/ar123179133955845.jpg");
+}
+#potato{
+color: white;
+font-family: 'Questrial', 'cursive';
+}

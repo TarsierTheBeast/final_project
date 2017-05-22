@@ -1,48 +1,60 @@
 var namespace = "http://www.w3.org/2000/svg"
-
+var score = 0
 // All of your code for the game goes here! This is where you need to create your character, write your animation loop function, implement keyboard control, etc.
+var scoreTab = makeText(score, 10, 10, 10)
+var character = makeImage("https://i0.wp.com/files.facepunch.com/garry/2015/July/23/2015-07-23_14-50-39.png?w=740",50,50,40,40)
 
-var character = makeImage("https://i0.wp.com/files.facepunch.com/garry/2015/July/23/2015-07-23_14-50-39.png?w=740",50,70,50,50)
+var obstacleThree = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",40,80,20,20)
 
-var obstacleThree = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",40,130,80,80)
+var obstacleOne = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",100,0,20,20)
 
-var obstacleOne = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",100,-30,100,100)
+var obstacleFour = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",150,50,20,20)
+var obstacleTwo = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",150,80,20,20)
 
-var obstacleFour = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",150,100,70,150)
-var obstacleTwo = makeImage("http://vignette2.wikia.nocookie.net/play-rust/images/b/b7/Bear_new.png/revision/latest?cb=20161109192908",150,-50,250,100)
-
-addEventListener("keydown",movecharacter)
-
-function movecharacter(event){
-  if(event.key==" "){
-    move(character,0,-35)
-  }
-}
 
 function animateObstacle(){
-   var oneX=getX(obstacleOne)
-  var twoX=getX(obstacleTwo)
-  var threeX=getX(obstacleThree)
-  var fourX=getX(obstacleFour)
-  var y=getY(character)
-  move(obstacleOne,-1,0)
-  move(obstacleTwo,-1,0)
-  move(obstacleThree,-1,0)
-  move(obstacleFour,-1,0)
-
+var random1 = Math.random() * 100
+var random2 = Math.random() * 100
+var random3 = Math.random() * 100
+var random4 = Math.random() * 100
+  move(obstacleOne,-1.5,0)
+  move(obstacleTwo,-1.5,0)
+  move(obstacleThree,-1.5,0)
+  move(obstacleFour,-1.5,0)
+  var oneX=getX(obstacleOne)
+ var twoX=getX(obstacleTwo)
+ var threeX=getX(obstacleThree)
+ var fourX=getX(obstacleFour)
+ var y=getY(character)
    if(oneX < -1 ){
     setX(obstacleOne,300)
+    setY(obstacleOne, random1)
+score = score + 1
   }if(twoX < -1 ){
     setX(obstacleTwo,300)
+    setY(obstacleTwo, random2)
+score = score + 1
   }if(threeX < -1 ){
     setX(obstacleThree,300)
+    setY(obstacleThree, random3)
+    score = score + 1
   }if(fourX < -1 ){
     setX(obstacleFour,300)
+    setY(obstacleFour, random4)
+    score = score + 1
   }
-
+  if(collides(character, obstacleOne)){
+    gameOver()
+  }else if(collides(character, obstacleTwo)){
+    gameOver()
+  }else if(collides(character, obstacleThree)){
+    gameOver()
+  }else if(collides(character, obstacleFour)){
+    gameOver()
+  }else{
+    scoreTab.innerHTML = score
   requestAnimationFrame(animateObstacle)
-
-
+}
 }
 animateObstacle()
 
@@ -52,20 +64,35 @@ function moveCharacter(event){
   var y = getY(character)
   if(event.key == "a"&& x > 0)
     {
-      move(character,-10,0)
-    }else if(event.key == "d"&& x < 260)
+      move(character,-5,0)
+    }else if(event.key == "d"&& x < 160)
       {
-        move(character,10,0)
-      }else if(event.key == "w"&& y > 0)
+        move(character,5,0)
+      }else if(event.key == "w"&& y > -10)
       {
-        move(character,0,-10)
-      }else if(event.key == "s"&& y < 130)
+        move(character,0,-5)
+      }else if(event.key == "s"&& y < 90)
       {
-        move(character,0,10)
+        move(character,0,5)
+      }
+      if(collides(character, obstacleOne)){
+        gameOver()
+      }else if(collides(character, obstacleTwo)){
+        gameOver()
+      }else if(collides(character, obstacleThree)){
+        gameOver()
+      }else if(collides(character, obstacleFour)){
+        gameOver()
+      }else{
+        requestAnimationFrame(moveCharacter)
       }
 }
-
-
+function gameOver(){
+var text = makeText("GOT EATEN", 50, 30, 20)
+}
+function retry(){
+  location.reload(true)
+}
 
 
 
