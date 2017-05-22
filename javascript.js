@@ -59,7 +59,7 @@ score = score + 1
 animateObstacle()
 
 addEventListener("keydown",moveCharacter)
-function moveCharacter(event){
+function moveCharacter(){
   var x = getX(character)
   var y = getY(character)
   if(event.key == "a"&& x > 0)
